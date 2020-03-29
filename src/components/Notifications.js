@@ -20,7 +20,7 @@ class Notifications extends React.Component {
         }
     }
     ShowNotifications() {
-        if (this.state.notify_box == true) {
+        if (this.state.notify_box === true) {
             this.setState({ notify_box: false });
         } else {
             this.setState({ notify_box: true })
@@ -85,9 +85,6 @@ class Notifications extends React.Component {
             paddingRight: '12px',
             color: 'green'
         };
-        const bell_noRing = {
-            color: '#fff'
-        };
         const flag_delete = {
             'position': 'absolute',
             'right': '21px',
@@ -113,7 +110,7 @@ class Notifications extends React.Component {
     </div>
     <ul style={(this.state.notify_box) ? notification_box_show : notification_box_hide}>
         <li style={notification_list}>You have {this.state.noti_count} Notifications</li>
-        <li style={(this.state.NotificationMsgList == '')? dontShow : showdelete}>Clear All<FontAwesomeIcon icon="trash-alt" onClick={this.deleteMsg.bind(this)} style={flag_delete} /></li>
+        <li style={(this.state.NotificationMsgList === '')? dontShow : showdelete}>Clear All<FontAwesomeIcon icon="trash-alt" onClick={this.deleteMsg.bind(this)} style={flag_delete} /></li>
         {this.state.NotificationMsgList.map((item, index) => {
             return (
                 <li key={index} style={notification_list_child}><FontAwesomeIcon icon="flag" style={flag} />{item.msg}</li>

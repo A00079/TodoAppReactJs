@@ -4,7 +4,11 @@ class HeroDiscreiption extends React.Component{
     constructor(prop){
         super(prop)
         this.state = {
-
+        }
+    }
+    componentDidMount(){
+        console.log("Props Discription",this.props.location.pathname);
+        if(this.props.location){
         }
     }
     render(){

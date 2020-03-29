@@ -1,11 +1,10 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Link } from 'react-router-dom';
 import Notifications from '../components/Notifications.js';
 
 class EnterHeros extends React.Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             hero: '',
             HeorArray: [],
@@ -13,13 +12,17 @@ class EnterHeros extends React.Component {
             notificationMsg: []
         };
     }
+
+    GoTo(Discription) {
+        console.log('Api Token 2292688641032311', Discription, this.props)
+        this.props.history.push('/Discription/' + Discription)
+    }
     deleteHeroFromList(heroid) {
         var AfterDeleteList = this.state.HeorArray.filter(item => {
             return item.id !== heroid
         });
         this.setState({ HeorArray: AfterDeleteList })
         this.setState({ herosCount: AfterDeleteList.length })
-
     };
     AddHero() {
         if (this.refs.hero.value === '') {
@@ -30,13 +33,16 @@ class EnterHeros extends React.Component {
             this.setState({ hero: '' });
             this.refs.hero.value = '';
             this.setState({ herosCount: obj.length })
-            var notification_msg = this.state.notificationMsg.concat({'msg' : this.state.hero + ' is added to your list'});
+            var notification_msg = this.state.notificationMsg.concat({ 'msg': this.state.hero + ' is added to your list' });
             this.state.notificationMsg = notification_msg
         }
     };
     addHeroToList(el) {
         this.setState({ hero: this.refs.hero.value })
     };
+    handleSuperHero(){
+        this.props.history.push('/YourHero')
+    }
     render() {
         const test = {
             'cursor': 'pointer',
@@ -85,9 +91,6 @@ class EnterHeros extends React.Component {
             'border': '1px solid',
             'borderRadius': '26px'
         };
-        const removedefaults = {
-            'textDecoration': 'none'
-        };
         const HeroState = {
             'position': 'absolute',
             'top': '65px',
@@ -97,28 +100,49 @@ class EnterHeros extends React.Component {
             'color': '#fff',
             'letterSpacing': '1px'
         };
-        const totalCount = {
-            'paddingLeft': '10px'
-        };
-        const HeroCount = {
-            'margin': '12px'
-        };
-        return (
+        const TryHeroState = {
+            'cursor':'pointer',
+            'position': 'absolute',
+            'top': '65px',
+            'right': '55px',
+            'fontSize': '1.4vw',
+            'fontWeight': 'bolder',
+            'color': 'oldlace',
+            'letterSpacing': '1px',
+            'background': 'linear-gradient(to right, #30CFD0 0%, #330867 100%)',
+            'borderRadius': '2px',
+            'boxShadow': '15px 11px 15px #000',
+            'width': '13%',
+            'height': '61px',
+            'overflowY': 'hidden',
+            'overflowWrap': 'normal'
+    };
+    const totalCount = {
+        'paddingLeft': '10px'
+    };
+    const HeroCount = {
+        'margin': '12px'
+    };
+    return(
             <div>
-                <Notifications NotiCount={this.state.herosCount} NotiMsg={this.state.notificationMsg}/>
-                <div style={HeroState}>
-                    Total Heros<FontAwesomeIcon icon="user-ninja" style={totalCount} />
-                    <h4 style={HeroCount}>{this.state.herosCount}</h4>
-                </div>
-                <input type='text' onChange={this.addHeroToList.bind(this)} ref="hero" placeholder='Enter Your Hero...' style={addHeros} />
-                <span onClick={this.AddHero.bind(this)} style={addMore}>&#43;</span>
-                <ul>
-                    {this.state.HeorArray.map((item, index) => {
-                        return (
-                            <li key={index} style={test} title="Click For More Details"><Link to={'/Discription/' + item.Hero} style={removedefaults}><span style={herolist}>{item.Hero}</span></Link><span title={'Delete ' + item.Hero} style={deleteHero} onClick={this.deleteHeroFromList.bind(this, item.id)}><FontAwesomeIcon icon="trash-alt" /></span></li>
-                        );
-                    })}
-                </ul>
+                
+    <Notifications NotiCount={this.state.herosCount} NotiMsg={this.state.notificationMsg} />
+    <div style={HeroState}>
+        Total Heros<FontAwesomeIcon icon="user-ninja" style={totalCount} />
+        <h4 style={HeroCount}>{this.state.herosCount}</h4>
+    </div>
+    <div style={TryHeroState} onClick={this.handleSuperHero.bind(this)}>
+        Try Which SuperHero Are You ?
+    </div>
+    <input type='text' onChange={this.addHeroToList.bind(this)} ref="hero" placeholder='Enter Your Hero...' style={addHeros} />
+    <span onClick={this.AddHero.bind(this)} style={addMore}>&#43;</span>
+    <ul>
+        {this.state.HeorArray.map((item, index) => {
+            return (
+                <li key={index} style={test} onClick={this.GoTo.bind(this, item.Hero)} title="Click For More Details"><span style={herolist}>{item.Hero}</span><span title={'Delete ' + item.Hero} style={deleteHero} onClick={this.deleteHeroFromList.bind(this, item.id)}><FontAwesomeIcon icon="trash-alt" /></span></li>
+            );
+        })}
+    </ul>
             </div >
         )
     }

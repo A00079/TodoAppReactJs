@@ -1,5 +1,4 @@
 import React from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 class HeaderNav extends React.Component {
     constructor(props) {
@@ -9,32 +8,13 @@ class HeaderNav extends React.Component {
         };
     }
     ShowNotifications() {
-        if (this.state.notify_box == true) {
+        if (this.state.notify_box === true) {
             this.setState({ notify_box: false });
         } else {
             this.setState({ notify_box: true })
         }
     };
     render() {
-        const notification_box_hide = {
-            'display': 'none'
-        };
-        const notification_box_show = {
-            display: 'block',
-            zIndex: '9999',
-            float: 'right',
-            marginRight: '126px',
-            marginTop: '45px',
-            listStyle: 'none',
-            padding: '10px 20px',
-            width: '22%',
-            height: '100px',
-            textAlign: 'center',
-            background: 'rgb(255, 255, 255)',
-            color: 'rgb(0, 0, 0)',
-            fontWeight: 'bolder',
-            borderRadius: '2px'
-    }
     const appHeader = {
         color: "white",
         backgroundColor: "DodgerBlue",

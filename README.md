@@ -1,5 +1,5 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
+A learnin purpose app made with react redux
 ## Available Scripts
 
 In the project directory, you can run:
